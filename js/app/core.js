@@ -14,6 +14,32 @@
     if (!en && !ft) return p;
     return Object.assign({}, p, en || {}, ft ? { forumTips: ft } : {});
   }
+  function tChain(c) {
+    if (currentLang !== 'en') return c;
+    const en = (typeof CHAINS_EN !== 'undefined') && CHAINS_EN[c.id];
+    if (!en) return c;
+    const steps = c.steps.map((s, i) => Object.assign({}, s, (en.steps && en.steps[i]) || {}));
+    return Object.assign({}, c, en, { steps });
+  }
+  function tCompat(c) {
+    if (currentLang !== 'en') return c;
+    const en = (typeof COMPAT_EN !== 'undefined') && COMPAT_EN[c.a + '__' + c.b];
+    if (!en) return c;
+    return Object.assign({}, c, en);
+  }
+  function tQuizQuestion(id, q) {
+    if (currentLang !== 'en') return q;
+    const en = (typeof QUIZ_EN !== 'undefined') && QUIZ_EN.questions[id];
+    if (!en) return q;
+    const answers = q.answers.map((a, i) => Object.assign({}, a, en.answers && en.answers[i] != null ? { label: en.answers[i] } : {}));
+    return Object.assign({}, q, { text: en.text || q.text }, { answers });
+  }
+  function tQuizResult(id, r) {
+    if (currentLang !== 'en') return r;
+    const en = (typeof QUIZ_EN !== 'undefined') && QUIZ_EN.results[id];
+    if (!en) return r;
+    return Object.assign({}, r, en);
+  }
   window.setLang = function(lang) {
     if (lang === currentLang) return;
     const sw = document.getElementById('lang-switch');

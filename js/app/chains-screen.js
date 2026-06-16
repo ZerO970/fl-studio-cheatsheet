@@ -19,7 +19,7 @@
     const genrePills = genres.map(g => `
       <span class="genre-pill${_chainsGenreFilter === g ? ' active' : ''}"
             onclick="filterChainGenre('${g}')">
-        ${g === 'all' ? 'Все' : g}
+        ${g === 'all' ? L('genreAll') : g}
       </span>`).join('');
 
     const filtered = _chainsGenreFilter === 'all'
@@ -27,6 +27,7 @@
       : CHAINS.filter(c => c.genre === _chainsGenreFilter);
 
     const cards = filtered.map(chain => {
+      const tc = tChain(chain);
       const pluginNames = chain.steps.map(s => {
         const p = PLUGINS.find(x => x.id === s.pluginId);
         return p ? `<span class="chain-plugin-dot">${p.name}</span>` : '';
@@ -39,8 +40,8 @@
             <span class="chain-icon">${chain.icon}</span>
             <span class="chain-genre-tag">${chain.genre}</span>
           </div>
-          <div class="chain-card-name">${chain.name}</div>
-          <div class="chain-card-desc">${chain.desc}</div>
+          <div class="chain-card-name">${tc.name}</div>
+          <div class="chain-card-desc">${tc.desc}</div>
           <div class="chain-plugins-preview">${pluginNames}</div>
         </div>`;
     }).join('');
@@ -63,8 +64,9 @@
   };
 
   window.openChainDetail = function(id) {
-    const chain = CHAINS.find(c => c.id === id);
-    if (!chain) return;
+    const rawChain = CHAINS.find(c => c.id === id);
+    if (!rawChain) return;
+    const chain = tChain(rawChain);
     _activeFeatureScreen = { type: 'chainDetail', id };
     navPush(L('navChains'), () => renderChainsScreen());
 

@@ -57,6 +57,14 @@ const LANG = {
     /* Chains screen */
     chainsTitle:         '⛓️ Цепочки плагинов',
     chainOpenBtn:        '→ открыть плагин',
+    genreAll:            'Все',
+    /* Compat screen */
+    compatTitle:         '🔗 Матрица совместимости',
+    compatAll:           'Все',
+    compatPerfect:       '✅ Идеально',
+    compatGood:          '👍 Хорошо',
+    compatCaution:       '⚠️ Осторожно',
+    compatAvoid:         '❌ Избегать',
     /* Quiz screen */
     quizTitle:           '🎯 Что мне нужно?',
     quizResultTitle:     '🎯 Результат',
@@ -145,6 +153,14 @@ const LANG = {
     /* Chains screen */
     chainsTitle:         '⛓️ Plugin Chains',
     chainOpenBtn:        '→ open plugin',
+    genreAll:            'All',
+    /* Compat screen */
+    compatTitle:         '🔗 Compatibility Matrix',
+    compatAll:           'All',
+    compatPerfect:       '✅ Perfect',
+    compatGood:          '👍 Good',
+    compatCaution:       '⚠️ Caution',
+    compatAvoid:         '❌ Avoid',
     /* Quiz screen */
     quizTitle:           '🎯 What do I need?',
     quizResultTitle:     '🎯 Result',

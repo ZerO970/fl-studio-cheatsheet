@@ -15,7 +15,7 @@
 
   function renderCompatScreen() {
     const ratings = ['all', 'perfect', 'good', 'caution', 'avoid'];
-    const labels  = { all:'Все', perfect:'✅ Идеально', good:'👍 Хорошо', caution:'⚠️ Осторожно', avoid:'❌ Избегать' };
+    const labels  = { all: L('compatAll'), perfect: L('compatPerfect'), good: L('compatGood'), caution: L('compatCaution'), avoid: L('compatAvoid') };
 
     const pills = ratings.map(r => `
       <span class="genre-pill${_compatFilter === r ? ' active' : ''}"
@@ -28,6 +28,7 @@
       : COMPAT.filter(c => c.rating === _compatFilter);
 
     const cards = filtered.map(c => {
+      const tc = tCompat(c);
       const pa = PLUGINS.find(p => p.id === c.a);
       const pb = PLUGINS.find(p => p.id === c.b);
       const nameA = pa ? pa.name : c.a;
@@ -44,8 +45,8 @@
               <span class="compat-arrow">+</span>
               <span class="compat-plugin-name" onclick="selectPlugin('${c.b}')">${nameB}</span>
             </div>
-            <div class="compat-label">${c.label}</div>
-            <div class="compat-note">${c.note}</div>
+            <div class="compat-label">${tc.label}</div>
+            <div class="compat-note">${tc.note}</div>
           </div>
         </div>`;
     }).join('');
@@ -54,7 +55,7 @@
       <div class="feature-screen">
         <div class="screen-header">
           ${backBtn()}
-          <h1 class="screen-title">🔗 Матрица совместимости</h1>
+          <h1 class="screen-title">${L('compatTitle')}</h1>
         </div>
         <div class="compat-filter">${pills}</div>
         <div class="compat-grid">${cards}</div>
@@ -79,10 +80,11 @@
   function renderQuiz(questionId, depth) {
     const q = QUIZ.questions[questionId];
     if (!q) return;
+    const q2 = tQuizQuestion(questionId, q);
 
     const progress = Math.min(depth / 3, 1);
 
-    const answers = q.answers.map(a => `
+    const answers = q2.answers.map(a => `
       <button class="quiz-answer-btn"
               onclick="quizAnswer('${a.next}', ${depth + 1})">
         ${a.label}
@@ -102,7 +104,7 @@
           </div>
           <div class="quiz-question">
             <span class="quiz-q-icon">${q.icon}</span>
-            <div class="quiz-q-text">${q.text}</div>
+            <div class="quiz-q-text">${q2.text}</div>
           </div>
           <div class="quiz-answers">${answers}</div>
         </div>
@@ -115,11 +117,12 @@
     if (QUIZ.questions[next]) {
       renderQuiz(next, depth);
     } else if (QUIZ.results[next]) {
-      renderQuizResult(QUIZ.results[next]);
+      renderQuizResult(next, QUIZ.results[next]);
     }
   };
 
-  function renderQuizResult(result) {
+  function renderQuizResult(resultId, rawResult) {
+    const result = tQuizResult(resultId, rawResult);
     const pluginCards = (result.plugins || []).map(id => {
       const p = PLUGINS.find(x => x.id === id);
       if (!p) return '';
