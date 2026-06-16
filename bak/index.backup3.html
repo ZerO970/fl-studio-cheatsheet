@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FL Studio — Plugin Cheatsheet</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- ===== SIDEBAR ===== -->
+  <aside id="sidebar">
+    <div class="sidebar-top">
+      <div class="logo" onclick="goHome()" title="На главную" style="cursor:pointer">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+          <rect width="28" height="28" rx="7" fill="#F97316"/>
+          <path d="M7 8h14M7 14h9M7 20h12" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span>FL Plugins</span>
+      </div>
+      <div class="sidebar-search-wrap">
+        <svg class="search-icon" width="14" height="14" viewBox="0 0 16 16" fill="none">
+          <circle cx="7" cy="7" r="5" stroke="#666" stroke-width="1.5"/>
+          <path d="M11 11l3 3" stroke="#666" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <input type="text" id="sidebar-search" placeholder="Поиск плагина...">
+        <span class="kbd">/</span>
+      </div>
+    </div>
+
+    <div class="sidebar-home-wrap">
+      <button class="sidebar-home-btn" id="sidebar-home-btn" onclick="goHome()">
+        <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
+          <path d="M2 7.5L8 2l6 5.5V14H10v-3.5H6V14H2V7.5z"
+                stroke="currentColor" stroke-width="1.5"
+                stroke-linejoin="round" stroke-linecap="round"/>
+        </svg>
+        Главная
+      </button>
+    </div>
+
+    <nav id="plugin-tree">
+      <!-- заполняется из app.js -->
+    </nav>
+  </aside>
+
+  <!-- ===== MAIN ===== -->
+  <main id="main">
+
+    <!-- WELCOME SCREEN -->
+    <div id="welcome">
+      <div class="welcome-glow"></div>
+      <div class="welcome-inner">
+        <div class="welcome-logo">
+          <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+            <rect width="56" height="56" rx="16" fill="#F97316"/>
+            <path d="M14 16h28M14 28h18M14 40h24" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h1>FL Studio Plugins</h1>
+        <p>Персональная шпаргалка · <span id="total-count"></span> плагинов</p>
+        <div class="welcome-search-wrap">
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none">
+            <circle cx="7" cy="7" r="5" stroke="#888" stroke-width="1.5"/>
+            <path d="M11 11l3 3" stroke="#888" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <input type="text" id="welcome-search" placeholder="Найти плагин по названию или тегу...">
+        </div>
+        <div id="category-grid">
+          <!-- карточки категорий из app.js -->
+        </div>
+      </div>
+    </div>
+
+    <!-- PLUGIN DETAIL -->
+    <div id="plugin-detail" class="hidden">
+
+      <div id="plugin-hero">
+        <div id="plugin-hero-bg"></div>
+        <div class="plugin-hero-content">
+          <div id="plugin-icon-wrap">
+            <!-- svg иконка из app.js -->
+          </div>
+          <div class="plugin-hero-meta">
+            <div id="plugin-developer"></div>
+            <h1 id="plugin-name"></h1>
+            <p id="plugin-tagline"></p>
+            <div id="plugin-badge-row"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="plugin-body">
+        <div class="tabs" id="tabs">
+          <button class="tab-btn active" data-tab="overview">Обзор</button>
+          <button class="tab-btn" data-tab="guide">Полный гайд</button>
+          <button class="tab-btn" data-tab="tips">Типсы и трюки</button>
+          <button class="tab-btn tab-btn-forum" data-tab="forum">
+            <svg width="11" height="11" viewBox="0 0 16 16" fill="none" style="margin-right:4px;vertical-align:-1px;flex-shrink:0">
+              <path d="M2 3h12v8H9l-3 3v-3H2V3z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+            </svg>С форумов
+          </button>
+        </div>
+
+        <div id="tab-overview" class="tab-pane active"></div>
+        <div id="tab-guide"    class="tab-pane"></div>
+        <div id="tab-tips"     class="tab-pane"></div>
+        <div id="tab-forum"    class="tab-pane"></div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <script src="js/data.js"></script>
+  <script src="js/chains.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
