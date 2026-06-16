@@ -122,6 +122,7 @@ body { display: flex; height: 100vh; }
 
 .sidebar-search-wrap {
   position: relative;
+  clear: both;
 }
 
 .sidebar-search-wrap .search-icon {
