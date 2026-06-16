@@ -8,9 +8,22 @@
 </head>
 <body>
 
+  <!-- ===== MOBILE TOPBAR ===== -->
+  <button id="mobile-menu-btn" aria-label="Меню" onclick="toggleSidebar()">
+    <svg width="20" height="20" viewBox="0 0 16 16" fill="none">
+      <path d="M2 4h12M2 8h12M2 12h12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+    </svg>
+  </button>
+  <div id="sidebar-overlay" onclick="closeSidebar()"></div>
+
   <!-- ===== SIDEBAR ===== -->
   <aside id="sidebar">
     <div class="sidebar-top">
+      <button id="sidebar-close-btn" aria-label="Закрыть меню" onclick="closeSidebar()">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+      </button>
       <div class="logo" onclick="goHome()" title="На главную" style="cursor:pointer">
         <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
           <rect width="28" height="28" rx="7" fill="#F97316"/>

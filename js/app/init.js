@@ -31,6 +31,26 @@
     initSidebarTooltip();
     initWelcomeCanvas();
     showWelcome();
+    bindMobileSidebar();
+  }
+
+  /* ── Mobile off-canvas sidebar ── */
+  window.toggleSidebar = function() {
+    document.getElementById('sidebar').classList.toggle('open');
+    document.getElementById('sidebar-overlay').classList.toggle('visible');
+  };
+  window.closeSidebar = function() {
+    document.getElementById('sidebar').classList.remove('open');
+    document.getElementById('sidebar-overlay').classList.remove('visible');
+  };
+  function bindMobileSidebar() {
+    document.getElementById('sidebar').addEventListener('click', (e) => {
+      if (window.innerWidth > 768) return;
+      if (e.target.closest('.tree-plugin') || e.target.closest('.search-result-item') ||
+          e.target.closest('.sidebar-home-btn') || e.target.closest('.tree-cat-open-btn')) {
+        closeSidebar();
+      }
+    });
   }
 
   /* Переприменяет языко-зависимые части статичного UI (вызывается при init и при смене языка) */

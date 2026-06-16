@@ -909,6 +909,114 @@ body { display: flex; height: 100vh; }
 }
 
 /* ============================================================
+   MOBILE — off-canvas sidebar + topbar
+   ============================================================ */
+
+#mobile-menu-btn {
+  display: none;
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 900;
+  width: 38px;
+  height: 38px;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-2);
+  border: 1px solid var(--border-2);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.35);
+}
+
+#sidebar-close-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text-3);
+  cursor: pointer;
+  padding: 4px;
+  margin-left: auto;
+}
+
+#sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  z-index: 850;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+@media (max-width: 768px) {
+  #mobile-menu-btn { display: flex; }
+  #sidebar-close-btn { display: block; }
+
+  body { overflow: hidden; }
+
+  #sidebar {
+    position: fixed;
+    top: 0; left: 0;
+    height: 100vh;
+    z-index: 950;
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+    box-shadow: 0 0 30px rgba(0,0,0,0.5);
+  }
+
+  #sidebar.open { transform: translateX(0); }
+
+  .logo { flex: 1; }
+
+  #sidebar-overlay {
+    display: block;
+  }
+  #sidebar-overlay.visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  #main { width: 100%; padding-top: 50px; }
+
+  #cat-bg-canvas {
+    left: 0;
+    width: 100vw;
+  }
+
+  #plugin-hero { padding: 30px 16px 24px; flex-direction: column; }
+  #plugin-hero-img { display: none; }
+  .plugin-hero-content { flex-direction: column; }
+  #plugin-name { font-size: 22px; }
+
+  .plugin-body { padding: 0 16px 32px; }
+  .feature-screen { padding: 20px 16px; }
+  .cat-screen-inner { padding: 20px 16px; }
+  #search-results { padding: 16px; }
+
+  .tabs { overflow-x: auto; }
+
+  #category-grid { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
+  .feature-nav { grid-template-columns: repeat(2, 1fr); }
+  .cat-plugins-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+  .chains-grid { grid-template-columns: 1fr; }
+  .compat-grid { grid-template-columns: 1fr; }
+
+  .compare-select-wrap { grid-template-columns: 1fr; }
+  .compare-vs { display: none; }
+  .compare-split { grid-template-columns: 1fr; }
+
+  .sf-wrap { flex-direction: column; }
+  .sf-palette { width: 100%; }
+
+  .plugin-picker-box { width: 92vw; }
+
+  .quiz-wrap { max-width: 100%; }
+}
+
+/* ============================================================
    SCROLLBAR — MAIN
    ============================================================ */
 
